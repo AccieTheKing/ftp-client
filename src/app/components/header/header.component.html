@@ -1,0 +1,26 @@
+<header>
+  <div class="row">
+    <div class="col s12 l3 xl2 left-side">
+      <h1>Ftp client</h1>
+    </div>
+    <div class="col s12 l9 xl10 application-view">
+      <div class="row">
+        <form (ngSubmit)="onSubmit(connectForm)" #connectForm="ngForm">
+          <div class="input-field col s12 xl5">
+            <input id="host_username" type="email" class="validate" name="username" ngModel />
+            <label for="host_username">Username</label>
+          </div>
+          <div class="input-field col s12 xl5">
+            <input id="host_password" type="password" class="validate" name="password" ngModel />
+            <label for="host_password">Password</label>
+          </div>
+          <div class="input-field col s12 xl2">
+            <button type="submit" class="waves-effect waves-light btn-large" [disabled]="!connectForm.form.valid">
+              Quick connect
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>

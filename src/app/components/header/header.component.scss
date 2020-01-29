@@ -1,0 +1,20 @@
+@import "./src/app/app.component.scss";
+
+header {
+  .left-side {
+    background-color: $main-blue-1;
+
+    h1 {
+      color: $main-white-0;
+      font-size: 1.5em;
+      font-weight: 200;
+      margin: 40px 0;
+      text-transform: uppercase;
+      text-align: center;
+    }
+  }
+
+  .application-view {
+    background-color: $main-grey-0;
+  }
+}
