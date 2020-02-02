@@ -1,1 +1,12 @@
-<p>main works!</p>
+<ng-template [ngIf]="this.connection.signedIn">
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m3 l2" *ngFor="let map of this.connection.folder">
+        <div class="folder-container" (click)="this.navigate(map)">
+          <i class="material-icons">folder</i>
+          <span>{{map}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

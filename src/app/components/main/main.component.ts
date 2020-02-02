@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ConnectionService} from 'src/app/services/connection.service';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private connection: ConnectionService) {
   }
 
+  ngOnInit() {}
+
+  public navigate(folderName: string) {
+    this.connection.navigateToFolder(folderName).subscribe(data => {
+      console.log(data);
+    });
+  }
 }

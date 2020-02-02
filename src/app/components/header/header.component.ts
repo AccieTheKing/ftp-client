@@ -20,9 +20,17 @@ export class HeaderComponent implements OnInit {
   public onSubmit(connectForm: NgForm) {
     const form = connectForm.form.value;
 
-    const url = form.host_url;
     const username = form.username;
     const password = form.password;
-    this.connection.login(username, password);
+    this.connection.login(username, password).subscribe(data => {
+      // @ts-ignore
+      if (data.folders) {
+        // @ts-ignore
+        this.connection.folder = data.folders;
+        this.connection.signedIn = true;
+      } else {
+        console.log('error');
+      }
+    });
   }
 }

@@ -1,0 +1,12 @@
+@import "./src/app/app.component.scss";
+
+.folder-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  i {
+    color: $main-green-1;
+    font-size: 8em;
+  }
+}

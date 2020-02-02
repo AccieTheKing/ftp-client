@@ -6,11 +6,11 @@
     <div class="col s12 l9 xl10 application-view">
       <div class="row">
         <form (ngSubmit)="onSubmit(connectForm)" #connectForm="ngForm">
-          <div class="input-field col s12 xl5">
-            <input id="host_username" type="email" class="validate" name="username" ngModel />
+          <div class="input-field col s12 xl3 offset-xl2">
+            <input id="host_username" type="text" class="validate" name="username" ngModel />
             <label for="host_username">Username</label>
           </div>
-          <div class="input-field col s12 xl5">
+          <div class="input-field col s12 xl3">
             <input id="host_password" type="password" class="validate" name="password" ngModel />
             <label for="host_password">Password</label>
           </div>
