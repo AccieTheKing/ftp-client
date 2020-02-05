@@ -3,23 +3,24 @@
 /**
  * This class will handle the authentication of the application, only users with the correct password can
  * upload files(Pictures for now) to the webserver
- * 
+ *
  * @author Acdaling Edusei
  */
 class AuthenticationController
 {
+    private static $conn;
 
     /**
      * This method will take the username and password, check them and store the username
      * if the password is correct
-     * 
+     *
      * @param username
      * @param password
      */
     public function login($username, $password)
     {
-        $_SESSION['SFTP_CONNECTION'] = new Net_SFTP('acdaling.nl.transurl.nl');
-        if (!$_SESSION['SFTP_CONNECTION']->login($username, $password)) {
+        self::$conn = new Net_SFTP('acdaling.nl.transurl.nl');
+        if (!self::$conn->login($username, $password)) {
             exit($this->isLoggedIn());
         } else {
             die($this->isLoggedIn());
@@ -33,8 +34,8 @@ class AuthenticationController
      */
     public function isLoggedIn()
     {
-        if (isset($_SESSION['SFTP_CONNECTION']) && !empty($_SESSION['SFTP_CONNECTION'])) {
-            die(json_encode(["folders" => $_SESSION['SFTP_CONNECTION']->nlist()]));
+        if (isset(self::$conn) && !empty(self::$conn)) {
+            die(json_encode(["folders" => self::$conn->nlist()]));
         }
         die(json_encode(["folders" => null]));
     }

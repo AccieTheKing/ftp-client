@@ -8,6 +8,8 @@
  */
 class FolderController
 {
+    private static $conn;
+
     /**
      * This method will retrieve all the images and
      * return the correct url to that image
@@ -32,15 +34,21 @@ class FolderController
 //        die(json_encode(['all_img' => $images])); // return json representation of array
     }
 
-
     /**
      * This method will be used to navigate through directories on the server
      *
      * @param $directoryName name of the directory to navigate to
+     * @param $username
+     * @param $password
      */
-    public static function navigate($directoryName)
+    public static function navigate($directoryName, $username, $password)
     {
-        die(json_encode(["folders" => $_SESSION['SFTP_CONNECTION']->chdir($directoryName)]));
+        self::$conn = new Net_SFTP('acdaling.nl.transurl.nl'); // fill session with new connection
+        if (self::$conn->login($username, $password)) {
+            self::$conn->chdir($directoryName); // open directory
+            die(json_encode(["folders" => self::$conn->nlist()]));
+        }
+        die(json_encode(["application_log" => "invalid post request in FolderController"]));
     }
 
 }

@@ -7,14 +7,18 @@ import {ConnectionService} from 'src/app/services/connection.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+  public folders: [] = [];
 
   constructor(private connection: ConnectionService) {
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   public navigate(folderName: string) {
-    this.connection.navigateToFolder(folderName).subscribe(data => {
+    this.connection.navigateToFolder(folderName).subscribe((data: []) => {
+      this.connection.folder = [];
+      this.connection.folder = data.folders;
       console.log(data);
     });
   }

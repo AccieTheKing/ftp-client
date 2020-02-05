@@ -6,12 +6,12 @@ import {HttpClient} from '@angular/common/http';
 })
 export class ConnectionService {
   private backendURL = 'http://localhost:80'; // url to contact the backend
+  private store = {}; // cache username and password for later use
+  public folder: [] = []; // holds names of the folders given by server
   public signedIn = false;
-  public folder = [];
 
   constructor(private http: HttpClient) {
   }
-
 
   /**
    * This method will connect with the backend
@@ -20,12 +20,8 @@ export class ConnectionService {
    * @param passWord password to connect with backend
    */
   public login(userName, passWord) {
-    const container = {
-      username: userName,
-      password: passWord
-    };
-
-    return this.http.post(`${this.backendURL}`, JSON.stringify(container));
+    this.store = {username: userName, password: passWord};
+    return this.http.post(`${this.backendURL}`, JSON.stringify(this.store));
   }
 
   /**
@@ -35,10 +31,20 @@ export class ConnectionService {
     return this.http.get(`${this.backendURL}/all`);
   }
 
+  /**
+   * This method will send the name of the folder that has been selected and
+   * the username and password to search through folders on the server
+   *
+   * @param folderName the name of a folder selected by the user
+   */
   public navigateToFolder(folderName: string) {
     const container = {
-      foldername: folderName
-    }
+      foldername: folderName,
+      // @ts-ignore
+      username: this.store.username,
+      // @ts-ignore
+      password: this.store.password
+    };
     return this.http.post(`${this.backendURL}/navigate`, JSON.stringify(container));
   }
 

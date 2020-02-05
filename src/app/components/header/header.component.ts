@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { ConnectionService } from 'src/app/services/connection.service';
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {ConnectionService} from 'src/app/services/connection.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +8,11 @@ import { ConnectionService } from 'src/app/services/connection.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private connection: ConnectionService) { }
+  constructor(private connection: ConnectionService) {
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   /**
    * This method will be fired when submitting the form
@@ -22,7 +24,7 @@ export class HeaderComponent implements OnInit {
 
     const username = form.username;
     const password = form.password;
-    this.connection.login(username, password).subscribe(data => {
+    this.connection.login(username, password).subscribe((data: []) => {
       // @ts-ignore
       if (data.folders) {
         // @ts-ignore

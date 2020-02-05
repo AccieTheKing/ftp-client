@@ -18,13 +18,13 @@ return [
     ],
     [
         "url" => "/navigate",
-        "method" => "POST",
-        "controller" => "FolderController@navigate"
+        "method" => "GET",
+        "controller" => "FolderController@all"
     ],
     [
         "url" => "/navigate",
-        "method" => "GET",
-        "controller" => "FolderController@all"
+        "method" => "POST",
+        "controller" => "FolderController@navigate"
     ],
     [
         "url" => "/upload",
