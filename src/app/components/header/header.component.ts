@@ -27,9 +27,11 @@ export class HeaderComponent implements OnInit {
     this.connection.login(username, password).subscribe((data: []) => {
       // @ts-ignore
       if (data.folders) {
+        this.connection.folder = [];
         // @ts-ignore
         this.connection.folder = data.folders;
-        this.connection.signedIn = true;
+        this.connection.initState.beginstate = true;
+        this.connection.initState.browsestate = false;
       } else {
         console.log('error');
       }
