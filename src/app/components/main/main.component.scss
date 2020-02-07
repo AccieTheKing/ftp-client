@@ -1,12 +1,20 @@
 @import "./src/app/app.component.scss";
 
-.folder-container {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
+.app-main-background {
+  background: $main-grey-0;
+  height: calc(100vh - 30px);
+  padding: 15px;
+  margin-bottom: -20px;
+  border-radius: 30px;
 
-  i {
-    color: $main-green-1;
-    font-size: 8em;
+  .folder-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    i {
+      color: $main-green-1;
+      font-size: 8em;
+    }
   }
 }

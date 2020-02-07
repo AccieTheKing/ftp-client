@@ -1,0 +1,38 @@
+@import "./src/app/app.component.scss";
+
+
+.sidebar-container {
+  color: $main-white-0;
+
+  h1.app-title {
+    font-size: 1.5em;
+    font-weight: 200;
+    margin: 40px 0;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .user-card-details {
+    display: flex;
+    align-items: center;
+
+    img {
+      max-width: 50px;
+    }
+
+    .details-user {
+      margin: 0 0 0 15px;
+
+      h3 {
+        font-size: 25px;
+        margin: 0 0 5px 0;
+      }
+
+      span {
+        color: $main-white-0;
+        font-weight: 300;
+      }
+    }
+  }
+
+}

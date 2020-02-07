@@ -1,26 +1,46 @@
-<ng-template [ngIf]="this.connection.initState.beginstate">
-  <div class="container">
-    <div class="row">
-      <div class="col s12 m3 l2" *ngFor="let map of this.connection.folder">
-        <div class="folder-container" (click)="this.navigate(map)">
-          <i class="material-icons">folder</i>
-          <span>{{map}}</span>
+<div class="app-main-background">
+  <app-header></app-header>
+  <div class="row">
+    <div class="col s12 xl6">
+      <div class="storage-card">
+        <div class="percentage-circle">
+
+        </div>
+        <div class="title-container">
+          <h2>Storage</h2>
+          <span>24.5 GB / 28.5 GB</span>
         </div>
       </div>
     </div>
-  </div>
-  <app-loading></app-loading>
-</ng-template>
-<ng-template [ngIf]="!this.connection.initState.beginstate && this.connection.initState.browsestate">
-  <div class="container">
-    <div class="row">
-      <div class="col s12 m3 l2" *ngFor="let map of this.connection.folder">
-        <div class="folder-container" (click)="this.navigate(map.name)">
-          <img src="{{map.icon}}">
-          <span>{{map.name}}</span>
-        </div>
-      </div>
+    <div class="col s12 xl6">
+      
     </div>
   </div>
-  <app-loading></app-loading>
-</ng-template>
+  <!--  <ng-template [ngIf]="this.connection.initState.beginstate">-->
+  <!--    <div class="container">-->
+  <!--      <div class="row">-->
+  <!--        <div class="col s12 m3 l2" *ngFor="let map of this.connection.folder">-->
+  <!--          <div class="folder-container" (click)="this.navigate(map)">-->
+  <!--            <i class="material-icons">folder</i>-->
+  <!--            <span>{{map}}</span>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--    <app-loading></app-loading>-->
+  <!--  </ng-template>-->
+  <!--  <ng-template [ngIf]="!this.connection.initState.beginstate && this.connection.initState.browsestate">-->
+  <!--    <div class="container">-->
+  <!--      <div class="row">-->
+  <!--        <div class="col s12 m3 l2" *ngFor="let map of this.connection.folder">-->
+  <!--          <div class="folder-container" (click)="this.navigate(map.name)">-->
+  <!--            <img src="{{map.icon}}">-->
+  <!--            <span>{{map.name}}</span>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--    <app-loading></app-loading>-->
+  <!--  </ng-template>-->
+
+</div>

@@ -1,0 +1,18 @@
+<ul>
+  <li *ngIf="this.connection.route.length > 0">
+    <div class="menu-item" (click)="this.navigate('/')">
+      <div class="icon-container">
+        <i class="material-icons">keyboard_return</i>
+      </div>
+      <span>Go back</span>
+    </div>
+  </li>
+  <li class="subfolder" *ngFor="let map of this.connection.menuFolders">
+    <div class="menu-item" (click)="this.navigate(map)">
+      <div class="icon-container">
+        <i class="material-icons">folder</i>
+      </div>
+      <span>{{map}}</span>
+    </div>
+  </li>
+</ul>

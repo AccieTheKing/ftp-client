@@ -8,12 +8,10 @@ import {DocumentFile} from '../models/document-file';
 export class ConnectionService {
   private backendURL = 'http://localhost:80'; // url to contact the backend
   private store = {}; // cache username and password for later use
+  public menuFolders: DocumentFile[] = [];
   public folder: DocumentFile[] = []; // holds names of the folders given by server
-  private route: [] = []; // folder navigation path
-  public initState = {
-    beginstate: false,
-    browsestate: false
-  };
+  public initState = false;
+  public route: [] = []; // folder navigation path
 
   constructor(private http: HttpClient) {
   }
@@ -60,13 +58,14 @@ export class ConnectionService {
    * @param folderName name of the folder user wants to navigate to
    */
   public createFolderUrl(folderName): string {
-    if (folderName === '.' || folderName === '..' && this.route.length > 0) {
-      this.route.pop();
+    if (folderName === '/' && this.route.length > 0) { // return one level
+      this.route.pop(); // remove the name of the folder from the link
     } else {
       // @ts-ignore
-      this.route.push(folderName);
+      this.route.push(folderName); // add the name of the folder to the link
     }
 
+    this.folder = []; // empty the array which holds the files in the folder
     let url = '';
     this.route.forEach(e => {
       url += `/${e}`;
@@ -82,15 +81,19 @@ export class ConnectionService {
   public createDocumentFile(foldersArray: []) {
     if (foldersArray.length > 0) { // check if not empty
       this.folder = []; // clear array
+      this.menuFolders = [];
       foldersArray.map(e => {
-        // filter to exclude files with names that consists of '.' and '..' names
-        if (!(e.includes('.') && e.charAt(0) === '.' && e.charAt(1) === '.' ||
-          e.charAt(0) === '.' && e.charAt(1) !== 'h')) {
+        // @ts-ignore
+        if (!(e.includes('.') && e.charAt(0) === '.' && e.charAt(1) === '.' || e.charAt(0) === '.' && e.charAt(1) !== 'h')) {
+          // @ts-ignore
           if (e.includes('.')) { // get files with extension
+            // @ts-ignore
             const name = e.split('.'); // split string to get name and extension
             const file = new DocumentFile(name[0], name[name.length - 1]);
             console.log(file);
             this.folder.push(file);
+          } else { // get folders instead of files
+            this.menuFolders.push(e);
           }
         }
       });
