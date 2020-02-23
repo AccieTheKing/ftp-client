@@ -19,6 +19,9 @@ navigate.post('/', (req, res) => {
     });
 });
 
+/**
+ * This method will handle 
+ */
 navigate.post('/to', (req, res) => {
     const connSettings = {
         host: req.body.host,
@@ -28,16 +31,17 @@ navigate.post('/to', (req, res) => {
         foldername: req.body.foldername
     };
 
-    // res.json({ "folders": req.body })
     sftp.list(`${connSettings.foldername}`)
-        .then((list) => { res.json({ "folders": list }) })
-        .catch(err => console.log('hier zit een error', err));
+        .then((list) => {
+            res.json({ "folders": list });
+        }).catch(err => {
+            console.log('hier zit een error', err);
+        });
 });
 
-navigate.get('/all', (req, res) => {
-    res.json({ "folders": conn.list('/') });
+navigate.post('/upload', (req, res) => {
+    console.log(req.body);
 });
-
 
 function navigationError(err) {
     return res.json({ "application_error": err });

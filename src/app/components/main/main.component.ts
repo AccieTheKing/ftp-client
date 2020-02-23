@@ -17,9 +17,9 @@ export class MainComponent implements OnInit {
   }
 
   public fileChange(event) {
-    this.connection.uploadFile(event.target.files[0], this.connection.selectedFolderTitle).subscribe(data => {
+    this.conn.uploadFile(event.target.files[0], this.conn.selectedFolderTitle).subscribe(data => {
       // @ts-ignore
-      this.connection.createDocumentFile(data.folders, true);
+      this.conn.createDocumentFile(data.folders, true);
     });
   }
 

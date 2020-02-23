@@ -1,7 +1,7 @@
 // dependencies
 const app = require('express')();
 const port = process.env.PORT || 3000;
-let cors = require('cors')
+const cors = require('cors')
 const routes = require('./routes/index');
 app.use(require('express').json());
 

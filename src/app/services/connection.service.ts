@@ -6,11 +6,13 @@ import { DocumentFile } from '../models/document-file';
   providedIn: 'root'
 })
 export class ConnectionService {
-  private backendURL = 'https://ftp-client-accie.herokuapp.com'; // url to contact the backend
+  // private backendURL = 'https://ftp-client-accie.herokuapp.com'; // url to contact the backend
+  private backendURL: string = 'http://localhost:3000'; // url to contact the backend
   private store = {}; // cache username and password for later use
+  private folder: DocumentFile[] = []; // holds names of the folders given by server
   public menuFolders: DocumentFile[] = []; // folders displayed in the sidebar
-  public folder: DocumentFile[] = []; // holds names of the folders given by server
-  public selectedFolderTitle = 'Welcome'; // the name of the folder that has been selected
+  public selectedFolderTitle: string = 'Welcome'; // the name of the folder that has been selected
+  public isLoading: boolean = false;
   public route: [] = []; // folder navigation path
 
   constructor(private http: HttpClient) {
@@ -43,7 +45,8 @@ export class ConnectionService {
   public uploadFile(fileFrontend: File, pathFrontend: string) {
     const formData: FormData = new FormData();
     formData.append('fileKey', fileFrontend);
-    return this.http.post(`${this.backendURL}/upload`, formData);
+    console.log(formData);
+    return this.http.post(`${this.backendURL}/navigate/upload`, formData);
   }
 
   /**
@@ -87,6 +90,7 @@ export class ConnectionService {
     }
 
     this.folder = []; // empty the array which holds the files in the folder
+    this.menuFolders = [];
     let url = '';
     this.route.forEach(e => {
       url += `/${e}`;

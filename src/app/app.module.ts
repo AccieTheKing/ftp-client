@@ -10,9 +10,10 @@ import {HttpClientModule} from '@angular/common/http';
 import {LoadingComponent} from './global/loading/loading.component';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {MenubarComponent} from './components/sidebar/menubar/menubar.component';
+import { LoadingTwoComponent } from './global/loading-two/loading-two.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, MainComponent, LoadingComponent, SidebarComponent, MenubarComponent],
+  declarations: [AppComponent, HeaderComponent, MainComponent, LoadingComponent, SidebarComponent, MenubarComponent, LoadingTwoComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {ConnectionService} from 'src/app/services/connection.service';
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ConnectionService } from 'src/app/services/connection.service';
 
 @Component({
   selector: 'app-header',
@@ -25,13 +25,16 @@ export class HeaderComponent implements OnInit {
     const hosturl = form.host;
     const username = form.username;
     const password = form.password;
+    this.connection.isLoading = true;
     this.connection.login(hosturl, username, password).subscribe((data: []) => {
       console.log(data);
       // @ts-ignore
       if (data.folders) {
         // @ts-ignore
         this.connection.createDocumentFile(data.folders);
+        this.connection.isLoading = false;
       } else {
+        this.connection.isLoading = false;
         console.log('error');
       }
     });

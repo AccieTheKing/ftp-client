@@ -23,16 +23,19 @@ export class MenubarComponent implements OnInit {
    * @param folderName name of folder in the sidebar
    */
   public navigate(folderName) {
-    this.connection.navigateToFolder(this.connection.createFolderUrl(folderName))
+    this.conn.isLoading = true;
+    this.conn.navigateToFolder(this.connection.createFolderUrl(folderName))
       .subscribe((data: []) => {
         // console.log('testttt', data);
         // @ts-ignore
-        if (`/${this.connection.route[0]}/${this.connection.route[1]}` === '/www/img') {
+        if (`/${this.conn.route[0]}/${this.conn.route[1]}` === '/www/img') {
           // @ts-ignore
-          this.connection.createDocumentFile(data.folders, true);
+          this.conn.createDocumentFile(data.folders, true);
+          this.conn.isLoading = false;
         } else {
           // @ts-ignore
-          this.connection.createDocumentFile(data.folders, false);
+          this.conn.createDocumentFile(data.folders, false);
+          this.conn.isLoading = false;
         }
       });
   }
