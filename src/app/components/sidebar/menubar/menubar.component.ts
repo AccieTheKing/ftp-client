@@ -25,7 +25,7 @@ export class MenubarComponent implements OnInit {
   public navigate(folderName) {
     this.connection.navigateToFolder(this.connection.createFolderUrl(folderName))
       .subscribe((data: []) => {
-        console.log('testttt', data);
+        // console.log('testttt', data);
         // @ts-ignore
         if (`/${this.connection.route[0]}/${this.connection.route[1]}` === '/www/img') {
           // @ts-ignore
