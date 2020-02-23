@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ConnectionService} from '../../../services/connection.service';
+import { Component, OnInit } from '@angular/core';
+import { ConnectionService } from '../../../services/connection.service';
 
 @Component({
   selector: 'app-menubar',
@@ -7,8 +7,10 @@ import {ConnectionService} from '../../../services/connection.service';
   styleUrls: ['./menubar.component.scss']
 })
 export class MenubarComponent implements OnInit {
+  public conn;
 
   constructor(private connection: ConnectionService) {
+    this.conn = connection;
   }
 
   ngOnInit() {
@@ -23,8 +25,15 @@ export class MenubarComponent implements OnInit {
   public navigate(folderName) {
     this.connection.navigateToFolder(this.connection.createFolderUrl(folderName))
       .subscribe((data: []) => {
+        console.log('testttt', data);
         // @ts-ignore
-        this.connection.createDocumentFile(data.folders);
+        if (`/${this.connection.route[0]}/${this.connection.route[1]}` === '/www/img') {
+          // @ts-ignore
+          this.connection.createDocumentFile(data.folders, true);
+        } else {
+          // @ts-ignore
+          this.connection.createDocumentFile(data.folders, false);
+        }
       });
   }
 }

@@ -1,7 +1,11 @@
 <header>
   <div class="row">
     <form (ngSubmit)="onSubmit(connectForm)" #connectForm="ngForm">
-      <div class="input-field col s12 xl3 offset-xl4">
+      <div class="input-field col s12 xl3 offset-xl1">
+        <input id="host_url" type="text" class="validate" name="host" ngModel/>
+        <label for="host_url">Host-url</label>
+      </div>
+      <div class="input-field col s12 xl3">
         <input id="host_username" type="text" class="validate" name="username" ngModel/>
         <label for="host_username">Username</label>
       </div>

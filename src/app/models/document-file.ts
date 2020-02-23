@@ -5,10 +5,16 @@ export class DocumentFile {
   public extention: string;
   public icon: string;
 
-  constructor(name: string, extention: string) {
+  constructor(name: string, extention: string, isOnServer: boolean) {
     this.name = `${name}.${extention}`;
     this.extention = extention;
-    this.icon = DocumentFIleExtensionEnum[extention];
+    if (isOnServer) {
+      // @ts-ignore
+      this.icon = `https://acdaling.nl/img/${this.name}`;
+    } else {
+      this.icon = DocumentFIleExtensionEnum[extention];
+    }
+
   }
 
 }

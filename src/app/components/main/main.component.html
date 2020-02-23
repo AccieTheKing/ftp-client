@@ -1,46 +1,42 @@
 <div class="app-main-background">
   <app-header></app-header>
   <div class="row">
-    <div class="col s12 xl6">
+    <div class="col s12">
       <div class="storage-card">
-        <div class="percentage-circle">
-
-        </div>
         <div class="title-container">
-          <h2>Storage</h2>
-          <span>24.5 GB / 28.5 GB</span>
+          <h2>{{this.conn.selectedFolderTitle}}</h2>
         </div>
       </div>
     </div>
-    <div class="col s12 xl6">
-      
+  </div>
+  <div class="row folder-app-container">
+    <div class="col s12 m3 l2" *ngFor="let map of this.conn.folder">
+      <div class="folder-container">
+        <img src="{{map.icon}}">
+        <span>{{map.name}}</span>
+      </div>
     </div>
   </div>
-  <!--  <ng-template [ngIf]="this.connection.initState.beginstate">-->
-  <!--    <div class="container">-->
-  <!--      <div class="row">-->
-  <!--        <div class="col s12 m3 l2" *ngFor="let map of this.connection.folder">-->
-  <!--          <div class="folder-container" (click)="this.navigate(map)">-->
-  <!--            <i class="material-icons">folder</i>-->
-  <!--            <span>{{map}}</span>-->
-  <!--          </div>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--    <app-loading></app-loading>-->
-  <!--  </ng-template>-->
-  <!--  <ng-template [ngIf]="!this.connection.initState.beginstate && this.connection.initState.browsestate">-->
-  <!--    <div class="container">-->
-  <!--      <div class="row">-->
-  <!--        <div class="col s12 m3 l2" *ngFor="let map of this.connection.folder">-->
-  <!--          <div class="folder-container" (click)="this.navigate(map.name)">-->
-  <!--            <img src="{{map.icon}}">-->
-  <!--            <span>{{map.name}}</span>-->
-  <!--          </div>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--    <app-loading></app-loading>-->
-  <!--  </ng-template>-->
-
+  <div class="row" *ngIf="!(this.conn.route.length > 0) && this.conn.menuFolders.length > 0">
+    <div class="col s12 ">
+      <h3 class="please-select-folder">Please select a folder</h3>
+    </div>
+  </div>
+  <div class="row" *ngIf="this.conn.route.length > 0 && this.conn.selectedFolderTitle === '/www/img'">
+    <div class="col s12">
+      <div class="wrapper">
+        <div class="file-upload">
+          <input type="file" name="file" (change)="this.fileChange($event)"/>
+          <i class="material-icons">
+            arrow_upward
+          </i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="this.conn.menuFolders.length > 0 || this.conn.route.length > 0">
+    <div class="col s12">
+      <app-loading></app-loading>
+    </div>
+  </div>
 </div>

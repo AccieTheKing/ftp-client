@@ -1,8 +1,10 @@
 @import "./src/app/app.component.scss";
 
+/* sidebar of the application */
 ul {
-  max-height: 300px;
+  max-height: 350px;
   overflow-y: auto;
+
   /* width */
   &::-webkit-scrollbar {
     width: 5px;
@@ -19,27 +21,41 @@ ul {
     border-radius: 5px;
   }
 
-  li {
-    div.menu-item {
-      display: flex;
-      align-items: baseline;
-      margin-bottom: 15px;
+  div.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-left: 15px;
+
+
+    &:hover {
+      color: $main-green-0;
+      background: $main-white-0;
+      cursor: pointer;
 
       .icon-container {
-        background: $main-white-0;
-        padding: 15px 17px;
-        border-radius: 15px;
-        margin-right: 20px;
+        background: $main-green-0;
 
         i {
-          color: $main-green-0;
+          color: $main-white-0;
         }
       }
     }
 
-    &.subfolder {
-      margin-left: 15px;
+    .icon-container {
+      display: flex;
+      background: $main-white-0;
+      padding: 15px 17px;
+      border-radius: 15px;
+      margin-right: 20px;
+
+      i {
+        color: $main-green-0;
+      }
     }
   }
 }
+
+
+
 

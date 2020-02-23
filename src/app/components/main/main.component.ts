@@ -7,21 +7,19 @@ import {ConnectionService} from 'src/app/services/connection.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+  public conn;
 
   constructor(private connection: ConnectionService) {
+    this.conn = connection;
   }
 
   ngOnInit() {
   }
 
-  /**
-   *
-   * @param folderName name of the folder that the user wants to navigate to
-   */
-  public navigate(folderName: string) {
-    this.connection.navigateToFolder(this.connection.createFolderUrl(folderName)).subscribe((data: []) => {
+  public fileChange(event) {
+    this.connection.uploadFile(event.target.files[0], this.connection.selectedFolderTitle).subscribe(data => {
       // @ts-ignore
-      this.connection.createDocumentFile(data.folders);
+      this.connection.createDocumentFile(data.folders, true);
     });
   }
 }

@@ -1,16 +1,16 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {DocumentFile} from '../models/document-file';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { DocumentFile } from '../models/document-file';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConnectionService {
-  private backendURL = 'http://localhost:80'; // url to contact the backend
+  private backendURL = 'https://ftp-client-accie.herokuapp.com'; // url to contact the backend
   private store = {}; // cache username and password for later use
-  public menuFolders: DocumentFile[] = [];
+  public menuFolders: DocumentFile[] = []; // folders displayed in the sidebar
   public folder: DocumentFile[] = []; // holds names of the folders given by server
-  public initState = false;
+  public selectedFolderTitle = 'Welcome'; // the name of the folder that has been selected
   public route: [] = []; // folder navigation path
 
   constructor(private http: HttpClient) {
@@ -19,19 +19,31 @@ export class ConnectionService {
   /**
    * This method will connect with the backend
    *
-   * @param userName email address of the user
-   * @param passWord password to connect with backend
+   * @param username email address of the user
+   * @param password password to connect with backend
    */
-  public login(userName, passWord) {
-    this.store = {username: userName, password: passWord};
-    return this.http.post(`${this.backendURL}`, JSON.stringify(this.store));
+  public login(hostUrl, username, password) {
+    this.store = { host: hostUrl, username, password };
+    return this.http.post(`${this.backendURL}/navigate`, this.store);
   }
 
   /**
    * This method will fetch all folders on the root level
    */
   public fetchFolders() {
-    return this.http.get(`${this.backendURL}/all`);
+    return this.http.get(`${this.backendURL}/navigate/all`);
+  }
+
+  /**
+   * This method will upload a given file to the server, this method is only available for me
+   *
+   * @param fileFrontend file that is going to be uploaded
+   * @param pathFrontend the path to the folder where the file is going to be uploaded to
+   */
+  public uploadFile(fileFrontend: File, pathFrontend: string) {
+    const formData: FormData = new FormData();
+    formData.append('fileKey', fileFrontend);
+    return this.http.post(`${this.backendURL}/upload`, formData);
   }
 
   /**
@@ -44,11 +56,20 @@ export class ConnectionService {
     const container = {
       foldername: folderName,
       // @ts-ignore
+      hosturl: this.store.hosturl,
+      // @ts-ignore
       username: this.store.username,
       // @ts-ignore
       password: this.store.password
     };
-    return this.http.post(`${this.backendURL}/navigate`, JSON.stringify(container));
+
+    if (folderName) { // check if name of folder is not empty
+      this.selectedFolderTitle = folderName;
+    } else {
+      this.selectedFolderTitle = 'Welcome';
+    }
+
+    return this.http.post(`${this.backendURL}/navigate/to`, container);
   }
 
 
@@ -78,23 +99,22 @@ export class ConnectionService {
    * This method will split the file and makes an DocumentFile Object which will
    * that provides a way to retrieve and get icons and names of file
    */
-  public createDocumentFile(foldersArray: []) {
+  public createDocumentFile(foldersArray: [], isMyImgFolder) {
     if (foldersArray.length > 0) { // check if not empty
       this.folder = []; // clear array
       this.menuFolders = [];
       foldersArray.map(e => {
         // @ts-ignore
-        if (!(e.includes('.') && e.charAt(0) === '.' && e.charAt(1) === '.' || e.charAt(0) === '.' && e.charAt(1) !== 'h')) {
+        if (e.type === '-') {
+          // console.log('file', e);
           // @ts-ignore
-          if (e.includes('.')) { // get files with extension
-            // @ts-ignore
-            const name = e.split('.'); // split string to get name and extension
-            const file = new DocumentFile(name[0], name[name.length - 1]);
-            console.log(file);
-            this.folder.push(file);
-          } else { // get folders instead of files
-            this.menuFolders.push(e);
-          }
+          const name = `${e.name}`.split('.'); // split string to get name and extension
+          const file = new DocumentFile(name[0], name[name.length - 1], isMyImgFolder);
+          // console.log(file);
+          this.folder.push(file);
+        } else { // get folders instead of files, will be shown in the sidebar
+          // @ts-ignore
+          this.menuFolders.push(e.name);
         }
       });
     }

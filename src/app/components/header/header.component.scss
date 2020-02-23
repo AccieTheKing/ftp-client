@@ -1,2 +1,11 @@
 @import "./src/app/app.component.scss";
 
+button {
+  background: $main-green-0;
+  color: $main-white-0;
+
+  &:hover {
+    background: $main-green-0;
+    color: $main-white-0;
+  }
+}
