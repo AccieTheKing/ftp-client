@@ -1,6 +1,7 @@
 const navigate = require('express').Router(); // custom router
 let Client = require('ssh2-sftp-client');
-let sftp = new Client();
+let sftp = new Client(); // new sftp
+let path = ''; // The path that the user was navigating to
 
 /**
  * For making connection the first time
@@ -31,7 +32,8 @@ navigate.post('/to', (req, res) => {
         foldername: req.body.foldername
     };
 
-    sftp.list(`${connSettings.foldername}`)
+    path = connSettings.foldername; // the path that the user was navigating to
+    sftp.list(`${path}`)
         .then((list) => {
             res.json({ "folders": list });
         }).catch(err => {
@@ -39,11 +41,24 @@ navigate.post('/to', (req, res) => {
         });
 });
 
-navigate.post('/upload', (req, res) => {
-    console.log(req.body);
+/**
+ * This method will handle any file uploads
+ */
+navigate.post('/upload', async (req, res) => {
+    const result = await sftp.put(req.files.file.data, `${path}/${req.files.file.name}`);
+    if (result) {
+        sftp.list(path).then(list => {
+            res.json({ "folders": list });
+        })
+    }
 });
 
-function navigationError(err) {
+/**
+ * This method is going to be implemented to handle errors
+ * 
+ * @param {*} err 
+ */
+const navigationError = (err) => {
     return res.json({ "application_error": err });
 }
 

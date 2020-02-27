@@ -17,9 +17,13 @@ export class MainComponent implements OnInit {
   }
 
   public fileChange(event) {
-    this.conn.uploadFile(event.target.files[0], this.conn.selectedFolderTitle).subscribe(data => {
+    const formData = new FormData(); // form 
+    const file: File = event.target.files[0]; // data
+    formData.append('file', file);
+    this.connection.uploadFile(formData, this.connection.selectedFolderTitle).subscribe(data => {
+      console.log(data);
       // @ts-ignore
-      this.conn.createDocumentFile(data.folders, true);
+      this.connection.createDocumentFile(data.folders, true);
     });
   }
 

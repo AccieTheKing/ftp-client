@@ -42,11 +42,9 @@ export class ConnectionService {
    * @param fileFrontend file that is going to be uploaded
    * @param pathFrontend the path to the folder where the file is going to be uploaded to
    */
-  public uploadFile(fileFrontend: File, pathFrontend: string) {
-    const formData: FormData = new FormData();
-    formData.append('fileKey', fileFrontend);
-    console.log(formData);
-    return this.http.post(`${this.backendURL}/navigate/upload`, formData);
+  public uploadFile(fileFrontend: FormData, pathFrontend: string) {
+    // formData.forEach((data) => console.log(data));
+    return this.http.post(`${this.backendURL}/navigate/upload`, fileFrontend);
   }
 
   /**

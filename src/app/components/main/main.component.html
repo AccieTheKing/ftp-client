@@ -26,12 +26,15 @@
     <div class="row" *ngIf="this.conn.route.length > 0 && this.conn.selectedFolderTitle === '/www/img'">
       <div class="col s12">
         <div class="wrapper">
+          <!-- <form #form="ngForm" (ngSubmit)="this.fileChange($event)"> -->
           <div class="file-upload">
-            <input type="file" name="file" (change)="this.fileChange($event)" />
+            <input type="file" name="file" ngModel (change)="this.fileChange($event)" />
             <i class="material-icons">
               arrow_upward
             </i>
           </div>
+          <!-- <button type="submit">Submit</button> -->
+          <!-- </form> -->
         </div>
       </div>
     </div>
