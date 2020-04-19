@@ -53,8 +53,15 @@ navigate.post('/upload', async (req, res) => {
 /**
  * This endpoint will remove folders from the server
  */
-navigate.post('/delete', (req, res) => {
-
+navigate.post('/delete', async (req, res) => {
+    try {
+        await sftp.delete(`${navigatedPath}/${req.fileName}`);
+        sftp.list(path).then(list => {
+            res.json({ "folders": list });
+        });
+    } catch (err) {
+        res.json({ "server_error": `something went wrong: ${err.message}` })
+    }
 });
 
 

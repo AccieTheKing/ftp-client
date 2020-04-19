@@ -20,14 +20,16 @@ export class MainComponent implements OnInit {
     const formData = new FormData(); // form 
     const file: File = event.target.files[0]; // data
     formData.append('file', file);
-    this.connection.uploadFile(formData, this.connection.selectedFolderTitle).subscribe(data => {
+    this.connection.uploadFile(formData).subscribe(data => {
       console.log(data);
       // @ts-ignore
       this.connection.createDocumentFile(data.folders, true);
     });
   }
 
-  public styling(e) {
-    console.log(e);
+  public deleteFile(file_name: string) {
+    this.connection.deleteFile(file_name).subscribe(data => {
+      console.log(data);
+    });
   }
 }

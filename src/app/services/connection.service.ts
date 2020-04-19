@@ -40,10 +40,18 @@ export class ConnectionService {
    * This method will upload a given file to the server, this method is only available for me
    *
    * @param fileFrontend file that is going to be uploaded
-   * @param pathFrontend the path to the folder where the file is going to be uploaded to
    */
-  public uploadFile(fileFrontend: FormData, pathFrontend: string) {
+  public uploadFile(fileFrontend: FormData) {
     return this.http.post(`${this.backendURL}/navigate/upload`, fileFrontend);
+  }
+
+  /**
+   * This method will remove a file from the server
+   * 
+   * @param fileName - name of file that's going to be removed
+   */
+  public deleteFile(fileName: string) {
+    return this.http.post(`${this.backendURL}/navigate/delete`, fileName);
   }
 
   /**
