@@ -1,4 +1,4 @@
-@import "./src/app/app.component.scss";
+@import "../../app.component";
 
 .app-main-background {
   background: $main-grey-0;
@@ -75,7 +75,7 @@
         font-weight: 600;
       }
 
-      input[type='file'] {
+      input[type="file"] {
         height: 80px;
         width: 80px;
         position: absolute;

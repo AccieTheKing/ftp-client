@@ -1,4 +1,4 @@
-@import "./src/app/app.component.scss";
+@import "../../app.component";
 
 .sidebar-container {
   color: $main-white-0;
@@ -33,5 +33,4 @@
       }
     }
   }
-
 }

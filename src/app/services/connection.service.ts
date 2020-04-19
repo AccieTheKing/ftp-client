@@ -6,8 +6,8 @@ import { DocumentFile } from '../models/document-file';
   providedIn: 'root'
 })
 export class ConnectionService {
-  // private backendURL = 'https://ftp-client-accie.herokuapp.com'; // url to contact the backend
-  private backendURL: string = 'http://localhost:3000'; // url to contact the backend
+  private backendURL = 'https://ftp-client-accie.herokuapp.com'; // url to contact the backend
+  // private backendURL: string = 'http://localhost:3000'; // url to contact the backend
   private store = {}; // cache username and password for later use
   private folder: DocumentFile[] = []; // holds names of the folders given by server
   public menuFolders: DocumentFile[] = []; // folders displayed in the sidebar
@@ -43,7 +43,6 @@ export class ConnectionService {
    * @param pathFrontend the path to the folder where the file is going to be uploaded to
    */
   public uploadFile(fileFrontend: FormData, pathFrontend: string) {
-    // formData.forEach((data) => console.log(data));
     return this.http.post(`${this.backendURL}/navigate/upload`, fileFrontend);
   }
 
@@ -108,11 +107,9 @@ export class ConnectionService {
       foldersArray.map(e => {
         // @ts-ignore
         if (e.type === '-') {
-          // console.log('file', e);
           // @ts-ignore
           const name = `${e.name}`.split('.'); // split string to get name and extension
           const file = new DocumentFile(name[0], name[name.length - 1], isMyImgFolder);
-          // console.log(file);
           this.folder.push(file);
         } else { // get folders instead of files, will be shown in the sidebar
           // @ts-ignore

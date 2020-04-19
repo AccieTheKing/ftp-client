@@ -1,4 +1,4 @@
-@import "./src/app/app.component.scss";
+@import "../../../app.component.scss";
 
 /* sidebar of the application */
 ul {
@@ -27,7 +27,6 @@ ul {
     padding: 15px;
     margin-left: 15px;
 
-
     &:hover {
       color: $main-green-0;
       background: $main-white-0;
@@ -55,7 +54,3 @@ ul {
     }
   }
 }
-
-
-
-
