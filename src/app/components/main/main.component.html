@@ -13,7 +13,7 @@
     <div class="row folder-app-container">
       <div class="col s12 m3 l2" *ngFor="let map of this.conn.folder">
         <ng-template [ngIf]="this.conn.route.length > 0 && this.conn.selectedFolderTitle === '/www/img'">
-          <span class="material-icons" (click)="this.deleteFile(map.name)">
+          <span class="material-icons mouse-pointer" (click)="this.deleteFile(map.name)">
             highlight_off
           </span>
         </ng-template>

@@ -6,8 +6,8 @@ import { DocumentFile } from '../models/document-file';
   providedIn: 'root'
 })
 export class ConnectionService {
-  private backendURL = 'https://ftp-client-accie.herokuapp.com'; // url to contact the backend
-  // private backendURL: string = 'http://localhost:3000'; // url to contact the backend
+  // private backendURL = 'https://ftp-client-accie.herokuapp.com'; // url to contact the backend
+  private backendURL: string = 'http://localhost:5000'; // url to contact the backend
   private store = {}; // cache username and password for later use
   private folder: DocumentFile[] = []; // holds names of the folders given by server
   public menuFolders: DocumentFile[] = []; // folders displayed in the sidebar
@@ -51,7 +51,7 @@ export class ConnectionService {
    * @param fileName - name of file that's going to be removed
    */
   public deleteFile(fileName: string) {
-    return this.http.post(`${this.backendURL}/navigate/delete`, fileName);
+    return this.http.post(`${this.backendURL}/navigate/delete`, { image: fileName });
   }
 
   /**

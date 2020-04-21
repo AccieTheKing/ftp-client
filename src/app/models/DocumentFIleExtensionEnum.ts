@@ -10,7 +10,7 @@ export enum DocumentFIleExtensionEnum {
   png = 'https://projects.acdaling.nl/ftp_client/assets/image.svg',
   svg = 'https://projects.acdaling.nl/ftp_client/assets/image.svg',
   pdf = 'https://projects.acdaling.nl/ftp_client/assets/pdf.svg',
-  txt = 'https://projects.acdaling.nl/ftp_client/assets/txt.svg',
+  txt = 'https://projects.acdaling.nl/ftp_client/assets/file.svg',
   zip = 'https://projects.acdaling.nl/ftp_client/assets/zip.svg',
   php = 'https://projects.acdaling.nl/ftp_client/assets/php.svg',
   ico = 'https://projects.acdaling.nl/ftp_client/assets/favicon.svg',
