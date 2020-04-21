@@ -45,13 +45,12 @@ navigate.post('/to', async (req, res) => {
  */
 navigate.post('/upload', async (req, res) => {
     try {
-        console.log(navigatedPath);
         await sftp.put(req.files.file.data, `${navigatedPath}/${req.files.file.name}`);
-        const list = await sftp.list(path);
+        const list = await sftp.list(navigatedPath);
         res.json({ "folders": list });
     } catch (err) {
-        res.json({ "server_error": `something went wrong: ${err.message}` });
-        console.warn(`something went wrong with uploading: ${err.message}`);
+        res.json({ "server_error": `something went wrong: ${err}` });
+        console.warn(`something went wrong with uploading: ${err}`);
     }
 });
 
@@ -60,12 +59,12 @@ navigate.post('/upload', async (req, res) => {
  */
 navigate.post('/delete', async (req, res) => {
     try {
-        console.log(navigatedPath, req.body.image);
-        await sftp.delete(`${navigatedPath}/${req.body.image}`);
-        const list = await sftp.list(path);
-        await res.json({ "folders": list });
+        await sftp.delete(`${navigatedPath}/${req.body.file}`);
+        const list = await sftp.list(navigatedPath);
+        res.json({ "folders": list });
     } catch (err) {
-        res.json({ "server_error": `something went wrong: ${err.message}` });
+        res.json({ "server_error": `something went wrong: ${err}` });
+        console.warn(`something went wrong with uploading: ${err}`);
     }
 });
 
@@ -85,10 +84,10 @@ const connectToServer = async () => {
  */
 const listToFolder = async (path) => {
     try {
-
-    } catch (err) {
         const list = await sftp.list(path);
         return list;
+    } catch (err) {
+
     }
 }
 

@@ -30,6 +30,8 @@ export class MainComponent implements OnInit {
   public deleteFile(file_name: string) {
     this.connection.deleteFile(file_name).subscribe(data => {
       console.log(data);
+      // @ts-ignore
+      this.connection.createDocumentFile(data.folders, true);
     });
   }
 }
