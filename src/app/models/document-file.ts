@@ -1,4 +1,4 @@
-import {DocumentFIleExtensionEnum} from './DocumentFIleExtensionEnum';
+import { DocumentFIleExtensionEnum } from './DocumentFIleExtensionEnum';
 
 export class DocumentFile {
   public name: string;
@@ -10,7 +10,7 @@ export class DocumentFile {
     this.extention = extention;
     if (isOnServer) {
       // @ts-ignore
-      this.icon = `https://acdaling.nl/img/${this.name}`;
+      this.icon = `https://images.acdaling.nl/${this.name}`;
     } else {
       this.icon = DocumentFIleExtensionEnum[extention];
     }
