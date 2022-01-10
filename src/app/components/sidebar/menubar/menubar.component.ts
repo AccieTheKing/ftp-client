@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ConnectionService } from '../../../services/connection.service';
+import { Component, OnInit } from "@angular/core";
+import { ConnectionService } from "../../../services/connection.service";
 
 @Component({
-  selector: 'app-menubar',
-  templateUrl: './menubar.component.html',
-  styleUrls: ['./menubar.component.scss']
+  selector: "app-menubar",
+  templateUrl: "./menubar.component.html",
+  styleUrls: ["./menubar.component.scss"],
 })
 export class MenubarComponent implements OnInit {
   public conn;
@@ -13,8 +13,7 @@ export class MenubarComponent implements OnInit {
     this.conn = connection;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   /**
    * This method will use the folders on the root level and use them to navigate quickly through
@@ -24,11 +23,15 @@ export class MenubarComponent implements OnInit {
    */
   public navigate(folderName) {
     this.conn.isLoading = true;
-    this.conn.navigateToFolder(this.connection.createFolderUrl(folderName))
+    this.conn
+      .navigateToFolder(this.connection.createFolderUrl(folderName))
       .subscribe((data: []) => {
         // console.log('testttt', data);
         // @ts-ignore
-        if (`/${this.conn.route[0]}/${this.conn.route[1]}` === '/www/img') {
+        if (
+          `/${this.conn.route[0]}/${this.conn.route[1]}` ===
+          "/subdomains/images"
+        ) {
           // @ts-ignore
           this.conn.createDocumentFile(data.folders, true);
           this.conn.isLoading = false;
